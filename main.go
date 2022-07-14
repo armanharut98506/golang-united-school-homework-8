@@ -16,7 +16,7 @@ type Arguments map[string]string
 type User struct {
 	Id string
 	Email string 
-	Age string 
+	Age int 
 }
 
 func InitialCheck(operation, fileName string) error {
