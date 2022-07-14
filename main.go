@@ -163,19 +163,13 @@ func Perform(args Arguments, writer io.Writer) error {
 		if err != nil {
 			return err
 		}
-		err = RemoveById(args["id"], args["fileName"], writer)
-		if err != nil {
-			return err
-		}
+		RemoveById(args["id"], args["fileName"], writer)
 	case "findById":
 		err := IdCheck(args["id"])
 		if err != nil {
 			return err
 		}
-		err = FindById(args["id"], args["fileName"], writer)
-		if err != nil {
-			return err
-		}
+		FindById(args["id"], args["fileName"], writer)
 	}
 	return nil
 }
