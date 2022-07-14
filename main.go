@@ -33,7 +33,7 @@ func InitialCheck(operation, fileName string) error {
 			return nil
 		}
 	}
-	return fmt.Errorf("Operation %w not allowed!", operation)
+	return fmt.Errorf("Operation %s not allowed!", operation)
 }
 
 func IdCheck(id string) error {
