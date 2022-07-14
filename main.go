@@ -36,6 +36,13 @@ func InitialCheck(operation, fileName string) error {
 	return fmt.Errorf("Operation %w not allowed!", operation)
 }
 
+func IdCheck(id string) error {
+	if id == "" {
+		return errors.New("-id flag has to be specified")
+	}
+	return nil
+}
+
 func List(fileName string, writer io.Writer) {
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -80,9 +87,6 @@ func Add(item string, fileName string) {
 }
 
 func RemoveById(id string, fileName string, writer io.Writer) {
-	if id == "" {
-		return errors.New("-id flag has to be specified")
-	}
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
@@ -118,9 +122,6 @@ func RemoveById(id string, fileName string, writer io.Writer) {
 }
 
 func FindById(id string, fileName string, writer io.Writer) {
-	if id == "" {
-		return errors.New("-id flag has to be specified")
-	}
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
@@ -158,12 +159,20 @@ func Perform(args Arguments, writer io.Writer) error {
 	case "add":
 		Add(args["item"], args["fileName"])
 	case "remove":
-		err := RemoveById(args["id"], args["fileName"], writer)
+		err := IdCheck(args["id"])
+		if err != nil {
+			return err
+		}
+		err = RemoveById(args["id"], args["fileName"], writer)
 		if err != nil {
 			return err
 		}
 	case "findById":
-		err := FindById(args["id"], args["fileName"], writer)
+		err := IdCheck(args["id"])
+		if err != nil {
+			return err
+		}
+		err = FindById(args["id"], args["fileName"], writer)
 		if err != nil {
 			return err
 		}
