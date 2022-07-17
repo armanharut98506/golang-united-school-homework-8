@@ -81,10 +81,6 @@ func List(fileName string, writer io.Writer) {
 }
 
 func Add(item string, fileName string) {
-	err := ItemCheck(item)
-	if err != nil {
-		panic(err)
-	}
 	var user User
 	json.Unmarshal([]byte(item), &user)
 
@@ -195,6 +191,10 @@ func Perform(args Arguments, writer io.Writer) error {
 	case "list":
 		List(args["fileName"], writer)
 	case "add":
+		err := ItemCheck(args["item"])
+		if err != nil {
+			return err
+		}
 		Add(args["item"], args["fileName"])
 	case "remove":
 		err := IdCheck(args["id"])
