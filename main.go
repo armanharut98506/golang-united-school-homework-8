@@ -56,7 +56,7 @@ func IdCheck(id string) error {
 
 func ItemCheck(item string) error {
 	if item == "" {
-		return errors.New("-item flag is missing")
+		return errors.New("-item flag has to be specified'")
 	}
 	return nil
 }
