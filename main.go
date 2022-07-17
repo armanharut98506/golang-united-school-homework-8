@@ -19,6 +19,17 @@ type User struct {
 	Age int 
 }
 
+func checkFile(filename string) error {
+	_, err := os.Stat(filename)
+			if os.IsNotExist(err) {
+					_, err := os.Create(filename)
+							if err != nil {
+									return err
+							}
+			}
+			return nil
+}
+
 func InitialCheck(operation, fileName string) error {
 	if fileName == "" {
 		return errors.New("-fileName flag has to be specified")
@@ -44,6 +55,10 @@ func IdCheck(id string) error {
 }
 
 func List(fileName string, writer io.Writer) {
+	err := checkFile(fileName)
+	if err != nil {
+		panic(err)
+	}
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
@@ -62,6 +77,10 @@ func Add(item string, fileName string) {
 	var user User
 	json.Unmarshal([]byte(item), &user)
 
+	err := checkFile(fileName)
+	if err != nil {
+		panic(err)
+	}
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
@@ -87,6 +106,10 @@ func Add(item string, fileName string) {
 }
 
 func RemoveById(id string, fileName string, writer io.Writer) {
+	err := checkFile(fileName)
+	if err != nil {
+		panic(err)
+	}
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
@@ -122,6 +145,10 @@ func RemoveById(id string, fileName string, writer io.Writer) {
 }
 
 func FindById(id string, fileName string, writer io.Writer) {
+	err := checkFile(fileName)
+	if err != nil {
+		panic(err)
+	}
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
