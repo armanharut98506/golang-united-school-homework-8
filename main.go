@@ -54,6 +54,13 @@ func IdCheck(id string) error {
 	return nil
 }
 
+func ItemCheck(item string) error {
+	if item == "" {
+		return errors.New("-item flag is missing")
+	}
+	return nil
+}
+
 func List(fileName string, writer io.Writer) {
 	err := checkFile(fileName)
 	if err != nil {
@@ -74,10 +81,14 @@ func List(fileName string, writer io.Writer) {
 }
 
 func Add(item string, fileName string) {
+	err := ItemCheck(item)
+	if err != nil {
+		panic(err)
+	}
 	var user User
 	json.Unmarshal([]byte(item), &user)
 
-	err := checkFile(fileName)
+	err = checkFile(fileName)
 	if err != nil {
 		panic(err)
 	}
