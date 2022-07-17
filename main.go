@@ -80,7 +80,7 @@ func List(fileName string, writer io.Writer) {
 	fmt.Fprint(writer, string(data))
 }
 
-func Add(item string, fileName string) {
+func Add(item string, fileName string, writer io.Writer) {
 	var user User
 	json.Unmarshal([]byte(item), &user)
 
@@ -100,6 +100,13 @@ func Add(item string, fileName string) {
 
 	var users []User
 	json.Unmarshal(data, &users)
+	
+	for _, u := range users {
+		if user.Id == u.Id {
+			fmt.Fprintf(writer, "Item with id %s already exists", u.Id)
+		}
+	}
+
 	users = append(users, user)
 
 	data, err = json.Marshal(users)
@@ -195,7 +202,7 @@ func Perform(args Arguments, writer io.Writer) error {
 		if err != nil {
 			return err
 		}
-		Add(args["item"], args["fileName"])
+		Add(args["item"], args["fileName"], writer)
 	case "remove":
 		err := IdCheck(args["id"])
 		if err != nil {
