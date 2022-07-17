@@ -182,11 +182,11 @@ func FindById(id string, fileName string, writer io.Writer) {
 			if err != nil {
 				panic(err)
 			}
-			fmt.Fprintf(writer, string(data))
+			fmt.Fprint(writer, string(data))
 			return 
 		}
 	}
-	fmt.Fprintf(writer, "")
+	fmt.Fprint(writer, "")
 }
 
 func Perform(args Arguments, writer io.Writer) error {
