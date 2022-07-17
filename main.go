@@ -77,7 +77,7 @@ func List(fileName string, writer io.Writer) {
 		panic(err)
 	}
 
-	fmt.Fprint(writer, string(data))
+	fmt.Fprintln(writer, string(data))
 }
 
 func Add(item string, fileName string, writer io.Writer) {
