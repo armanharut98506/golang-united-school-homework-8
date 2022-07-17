@@ -8,7 +8,7 @@ import (
 	"errors"
 	"strconv"
 	"io/ioutil"
- "encoding/json"
+  "encoding/json"
 )
 
 type Arguments map[string]string
@@ -56,7 +56,7 @@ func IdCheck(id string) error {
 
 func ItemCheck(item string) error {
 	if item == "" {
-		return errors.New("-item flag has to be specified'")
+		return errors.New("-item flag has to be specified")
 	}
 	return nil
 }
