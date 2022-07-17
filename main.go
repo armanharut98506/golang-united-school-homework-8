@@ -186,7 +186,7 @@ func FindById(id string, fileName string, writer io.Writer) {
 			return 
 		}
 	}
-	fmt.Fprintln(writer, "")
+	fmt.Fprintf(writer, "")
 }
 
 func Perform(args Arguments, writer io.Writer) error {
