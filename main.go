@@ -84,7 +84,7 @@ func Add(item string, fileName string) {
 	var user User
 	json.Unmarshal([]byte(item), &user)
 
-	err = checkFile(fileName)
+	err := checkFile(fileName)
 	if err != nil {
 		panic(err)
 	}
